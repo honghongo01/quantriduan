@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QLBHLNModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="QLBHLNModelStoreContainer">
+          <EntitySet Name="CHATLIEU" EntityType="QLBHLNModel.Store.CHATLIEU" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CHITIETHOADON" EntityType="QLBHLNModel.Store.CHITIETHOADON" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="HANG" EntityType="QLBHLNModel.Store.HANG" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="HOADON" EntityType="QLBHLNModel.Store.HOADON" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="KHACHHANG" EntityType="QLBHLNModel.Store.KHACHHANG" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="NHANVIEN" EntityType="QLBHLNModel.Store.NHANVIEN" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CHATLIEU_MaChatLieu_HANG" Association="QLBHLNModel.Store.FK_CHATLIEU_MaChatLieu_HANG">
+            <End Role="CHATLIEU" EntitySet="CHATLIEU" />
+            <End Role="HANG" EntitySet="HANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HANG_MaHang_HOADON" Association="QLBHLNModel.Store.FK_HANG_MaHang_HOADON">
+            <End Role="HANG" EntitySet="HANG" />
+            <End Role="HOADON" EntitySet="HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KHACHHANG_MaKH_HOADON" Association="QLBHLNModel.Store.FK_KHACHHANG_MaKH_HOADON">
+            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+            <End Role="HOADON" EntitySet="HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NHANVIEN_MaNV_HOADON" Association="QLBHLNModel.Store.FK_NHANVIEN_MaNV_HOADON">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="HOADON" EntitySet="HOADON" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CHATLIEU">
+          <Key>
+            <PropertyRef Name="MaChatLieu" />
+          </Key>
+          <Property Name="MaChatLieu" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TenChatLieu" Type="nvarchar" Nullable="false" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="CHITIETHOADON">
+          <Key>
+            <PropertyRef Name="MaHD" />
+            <PropertyRef Name="MaHang" />
+          </Key>
+          <Property Name="MaHD" Type="int" Nullable="false" />
+          <Property Name="MaHang" Type="int" Nullable="false" />
+          <Property Name="SoLuong" Type="int" Nullable="false" />
+          <Property Name="DonGia" Type="float" Nullable="false" />
+          <Property Name="GiamGia" Type="float" Nullable="false" />
+          <Property Name="ThanhTien" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HANG">
+          <Key>
+            <PropertyRef Name="MaHang" />
+          </Key>
+          <Property Name="MaHang" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TenHang" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DonGiaNhap" Type="float" Nullable="false" />
+          <Property Name="DonGiaBan" Type="float" Nullable="false" />
+          <Property Name="SoLuong" Type="int" Nullable="false" />
+          <Property Name="MaChatLieu" Type="int" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="200" />
+          <Property Name="AnhHH" Type="nvarchar" MaxLength="100" />
+          <Property Name="NgayNhapKho" Type="date" />
+          <Property Name="NguonGoc" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="HOADON">
+          <Key>
+            <PropertyRef Name="MaHD" />
+          </Key>
+          <Property Name="MaHD" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MaHang" Type="int" Nullable="false" />
+          <Property Name="MaNV" Type="int" Nullable="false" />
+          <Property Name="NgayBan" Type="date" Nullable="false" />
+          <Property Name="MaKH" Type="int" Nullable="false" />
+          <Property Name="TongTien" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KHACHHANG">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TenKhach" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DiaChiKH" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="SDTKH" Type="char" Nullable="false" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="NHANVIEN">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TaiKhoan" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="MatKhau" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="HoTenNV" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="NgaySinh" Type="char" Nullable="false" MaxLength="20" />
+          <Property Name="GioiTinh" Type="nvarchar" Nullable="false" MaxLength="5" />
+          <Property Name="DiaChi" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CMND" Type="char" Nullable="false" MaxLength="9" />
+          <Property Name="SDT" Type="char" Nullable="false" MaxLength="12" />
+          <Property Name="AnhNV" Type="nvarchar" MaxLength="100" />
+          <Property Name="ChucVu" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="NgayBDLV" Type="char" Nullable="false" MaxLength="20" />
+          <Property Name="HeSoLuong" Type="float" />
+          <Property Name="Luong" Type="float" />
+        </EntityType>
+        <Association Name="FK_CHATLIEU_MaChatLieu_HANG">
+          <End Role="CHATLIEU" Type="QLBHLNModel.Store.CHATLIEU" Multiplicity="0..1" />
+          <End Role="HANG" Type="QLBHLNModel.Store.HANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHATLIEU">
+              <PropertyRef Name="MaChatLieu" />
+            </Principal>
+            <Dependent Role="HANG">
+              <PropertyRef Name="MaChatLieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HANG_MaHang_HOADON">
+          <End Role="HANG" Type="QLBHLNModel.Store.HANG" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HOADON" Type="QLBHLNModel.Store.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANG">
+              <PropertyRef Name="MaHang" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="MaHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KHACHHANG_MaKH_HOADON">
+          <End Role="KHACHHANG" Type="QLBHLNModel.Store.KHACHHANG" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HOADON" Type="QLBHLNModel.Store.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHHANG">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NHANVIEN_MaNV_HOADON">
+          <End Role="NHANVIEN" Type="QLBHLNModel.Store.NHANVIEN" Multiplicity="1" />
+          <End Role="HOADON" Type="QLBHLNModel.Store.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+      warning 6013: The table/view 'QLBHLN.dbo.THONGBAO' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+      
+      <EntityType Name="THONGBAO">
+        <Property Name="ThongBao" Type="nvarchar" MaxLength="200" />
+      </EntityType>
+      Errors Found During Generation:
+      warning 6013: The table/view 'QLBHLN.dbo.TRANGTHAI' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+      
+      <EntityType Name="TRANGTHAI">
+        <Property Name="TaiKhoan" Type="nvarchar" MaxLength="50" />
+        <Property Name="CheDo" Type="int" />
+      </EntityType>-->
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLBHLNModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="QLBHLNEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CHATLIEUx" EntityType="QLBHLNModel.CHATLIEU" />
+          <EntitySet Name="CHITIETHOADONs" EntityType="QLBHLNModel.CHITIETHOADON" />
+          <EntitySet Name="HANGs" EntityType="QLBHLNModel.HANG" />
+          <EntitySet Name="HOADONs" EntityType="QLBHLNModel.HOADON" />
+          <EntitySet Name="KHACHHANGs" EntityType="QLBHLNModel.KHACHHANG" />
+          <EntitySet Name="NHANVIENs" EntityType="QLBHLNModel.NHANVIEN" />
+          <AssociationSet Name="FK_CHATLIEU_MaChatLieu_HANG" Association="QLBHLNModel.FK_CHATLIEU_MaChatLieu_HANG">
+            <End Role="CHATLIEU" EntitySet="CHATLIEUx" />
+            <End Role="HANG" EntitySet="HANGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HANG_MaHang_HOADON" Association="QLBHLNModel.FK_HANG_MaHang_HOADON">
+            <End Role="HANG" EntitySet="HANGs" />
+            <End Role="HOADON" EntitySet="HOADONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KHACHHANG_MaKH_HOADON" Association="QLBHLNModel.FK_KHACHHANG_MaKH_HOADON">
+            <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
+            <End Role="HOADON" EntitySet="HOADONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NHANVIEN_MaNV_HOADON" Association="QLBHLNModel.FK_NHANVIEN_MaNV_HOADON">
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+            <End Role="HOADON" EntitySet="HOADONs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CHATLIEU">
+          <Key>
+            <PropertyRef Name="MaChatLieu" />
+          </Key>
+          <Property Name="MaChatLieu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenChatLieu" Type="String" Nullable="false" MaxLength="40" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="HANGs" Relationship="QLBHLNModel.FK_CHATLIEU_MaChatLieu_HANG" FromRole="CHATLIEU" ToRole="HANG" />
+        </EntityType>
+        <EntityType Name="CHITIETHOADON">
+          <Key>
+            <PropertyRef Name="MaHD" />
+            <PropertyRef Name="MaHang" />
+          </Key>
+          <Property Name="MaHD" Type="Int32" Nullable="false" />
+          <Property Name="MaHang" Type="Int32" Nullable="false" />
+          <Property Name="SoLuong" Type="Int32" Nullable="false" />
+          <Property Name="DonGia" Type="Double" Nullable="false" />
+          <Property Name="GiamGia" Type="Double" Nullable="false" />
+          <Property Name="ThanhTien" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="HANG">
+          <Key>
+            <PropertyRef Name="MaHang" />
+          </Key>
+          <Property Name="MaHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenHang" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DonGiaNhap" Type="Double" Nullable="false" />
+          <Property Name="DonGiaBan" Type="Double" Nullable="false" />
+          <Property Name="SoLuong" Type="Int32" Nullable="false" />
+          <Property Name="MaChatLieu" Type="Int32" />
+          <Property Name="GhiChu" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="AnhHH" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="NgayNhapKho" Type="DateTime" Precision="0" />
+          <Property Name="NguonGoc" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="CHATLIEU" Relationship="QLBHLNModel.FK_CHATLIEU_MaChatLieu_HANG" FromRole="HANG" ToRole="CHATLIEU" />
+          <NavigationProperty Name="HOADONs" Relationship="QLBHLNModel.FK_HANG_MaHang_HOADON" FromRole="HANG" ToRole="HOADON" />
+        </EntityType>
+        <EntityType Name="HOADON">
+          <Key>
+            <PropertyRef Name="MaHD" />
+          </Key>
+          <Property Name="MaHD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaHang" Type="Int32" Nullable="false" />
+          <Property Name="MaNV" Type="Int32" Nullable="false" />
+          <Property Name="NgayBan" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MaKH" Type="Int32" Nullable="false" />
+          <Property Name="TongTien" Type="Double" Nullable="false" />
+          <NavigationProperty Name="HANG" Relationship="QLBHLNModel.FK_HANG_MaHang_HOADON" FromRole="HOADON" ToRole="HANG" />
+          <NavigationProperty Name="KHACHHANG" Relationship="QLBHLNModel.FK_KHACHHANG_MaKH_HOADON" FromRole="HOADON" ToRole="KHACHHANG" />
+          <NavigationProperty Name="NHANVIEN" Relationship="QLBHLNModel.FK_NHANVIEN_MaNV_HOADON" FromRole="HOADON" ToRole="NHANVIEN" />
+        </EntityType>
+        <EntityType Name="KHACHHANG">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenKhach" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DiaChiKH" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="SDTKH" Type="String" Nullable="false" MaxLength="12" Unicode="false" FixedLength="true" />
+          <NavigationProperty Name="HOADONs" Relationship="QLBHLNModel.FK_KHACHHANG_MaKH_HOADON" FromRole="KHACHHANG" ToRole="HOADON" />
+        </EntityType>
+        <EntityType Name="NHANVIEN">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaiKhoan" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="MatKhau" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="HoTenNV" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="NgaySinh" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="true" />
+          <Property Name="GioiTinh" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
+          <Property Name="DiaChi" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CMND" Type="String" Nullable="false" MaxLength="9" Unicode="false" FixedLength="true" />
+          <Property Name="SDT" Type="String" Nullable="false" MaxLength="12" Unicode="false" FixedLength="true" />
+          <Property Name="AnhNV" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="ChucVu" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="NgayBDLV" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="true" />
+          <Property Name="HeSoLuong" Type="Double" />
+          <Property Name="Luong" Type="Double" />
+          <NavigationProperty Name="HOADONs" Relationship="QLBHLNModel.FK_NHANVIEN_MaNV_HOADON" FromRole="NHANVIEN" ToRole="HOADON" />
+        </EntityType>
+        <Association Name="FK_CHATLIEU_MaChatLieu_HANG">
+          <End Role="CHATLIEU" Type="QLBHLNModel.CHATLIEU" Multiplicity="0..1" />
+          <End Role="HANG" Type="QLBHLNModel.HANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHATLIEU">
+              <PropertyRef Name="MaChatLieu" />
+            </Principal>
+            <Dependent Role="HANG">
+              <PropertyRef Name="MaChatLieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HANG_MaHang_HOADON">
+          <End Role="HANG" Type="QLBHLNModel.HANG" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HOADON" Type="QLBHLNModel.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANG">
+              <PropertyRef Name="MaHang" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="MaHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KHACHHANG_MaKH_HOADON">
+          <End Role="KHACHHANG" Type="QLBHLNModel.KHACHHANG" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HOADON" Type="QLBHLNModel.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHHANG">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NHANVIEN_MaNV_HOADON">
+          <End Role="NHANVIEN" Type="QLBHLNModel.NHANVIEN" Multiplicity="1" />
+          <End Role="HOADON" Type="QLBHLNModel.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLBHLNModelStoreContainer" CdmEntityContainer="QLBHLNEntities">
+          <EntitySetMapping Name="CHATLIEUx">
+            <EntityTypeMapping TypeName="QLBHLNModel.CHATLIEU">
+              <MappingFragment StoreEntitySet="CHATLIEU">
+                <ScalarProperty Name="MaChatLieu" ColumnName="MaChatLieu" />
+                <ScalarProperty Name="TenChatLieu" ColumnName="TenChatLieu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHITIETHOADONs">
+            <EntityTypeMapping TypeName="QLBHLNModel.CHITIETHOADON">
+              <MappingFragment StoreEntitySet="CHITIETHOADON">
+                <ScalarProperty Name="MaHD" ColumnName="MaHD" />
+                <ScalarProperty Name="MaHang" ColumnName="MaHang" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="GiamGia" ColumnName="GiamGia" />
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HANGs">
+            <EntityTypeMapping TypeName="QLBHLNModel.HANG">
+              <MappingFragment StoreEntitySet="HANG">
+                <ScalarProperty Name="MaHang" ColumnName="MaHang" />
+                <ScalarProperty Name="TenHang" ColumnName="TenHang" />
+                <ScalarProperty Name="DonGiaNhap" ColumnName="DonGiaNhap" />
+                <ScalarProperty Name="DonGiaBan" ColumnName="DonGiaBan" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="MaChatLieu" ColumnName="MaChatLieu" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="AnhHH" ColumnName="AnhHH" />
+                <ScalarProperty Name="NgayNhapKho" ColumnName="NgayNhapKho" />
+                <ScalarProperty Name="NguonGoc" ColumnName="NguonGoc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HOADONs">
+            <EntityTypeMapping TypeName="QLBHLNModel.HOADON">
+              <MappingFragment StoreEntitySet="HOADON">
+                <ScalarProperty Name="MaHD" ColumnName="MaHD" />
+                <ScalarProperty Name="MaHang" ColumnName="MaHang" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="NgayBan" ColumnName="NgayBan" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KHACHHANGs">
+            <EntityTypeMapping TypeName="QLBHLNModel.KHACHHANG">
+              <MappingFragment StoreEntitySet="KHACHHANG">
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="TenKhach" ColumnName="TenKhach" />
+                <ScalarProperty Name="DiaChiKH" ColumnName="DiaChiKH" />
+                <ScalarProperty Name="SDTKH" ColumnName="SDTKH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHANVIENs">
+            <EntityTypeMapping TypeName="QLBHLNModel.NHANVIEN">
+              <MappingFragment StoreEntitySet="NHANVIEN">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="HoTenNV" ColumnName="HoTenNV" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="AnhNV" ColumnName="AnhNV" />
+                <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
+                <ScalarProperty Name="NgayBDLV" ColumnName="NgayBDLV" />
+                <ScalarProperty Name="HeSoLuong" ColumnName="HeSoLuong" />
+                <ScalarProperty Name="Luong" ColumnName="Luong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
